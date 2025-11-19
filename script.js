@@ -14,6 +14,7 @@ function createSection(name) {
     title.innerText = name;
 
     const container = document.createElement('section');
+    container.classList.add('playlist');
     container.id = targetId;
 
     document.body.appendChild(title);
@@ -25,11 +26,14 @@ function createSection(name) {
 function renderPlaylist(songs, container) {
     songs.forEach(song => {
         const box = document.createElement('div');
+        box.classList.add('song', 'border', 'd-flex', 'align-items-start', 'gap-3');
 
         const img = document.createElement('img');
+        img.classList.add('covers', 'border', 'p-1');
         img.src = '.assets/images/' + song.image;
 
         const textBox = document.createElement('div');
+        textBox.classList.add('flex-grow-1');
 
         const title = document.createElement('h3');
         title.innerText = song.title;

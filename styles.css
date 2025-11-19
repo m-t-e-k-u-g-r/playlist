@@ -1,0 +1,51 @@
+:root {
+    --min-font-size: 1rem;
+    --max-font-size: 1.5rem;
+    --primary-spacing: clamp(0.5rem, 2vw, 2rem);
+    --border-color: rgb(164, 164, 164);
+}
+
+body {
+    padding: var(--primary-spacing);
+    font-size: var(--min-font-size);
+}
+
+.playlist {
+    margin: var(--primary-spacing) auto;
+    padding: var(--primary-spacing);
+    border: solid var(--border-color) 0.5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 1400px;
+    width: 95%;
+    box-sizing: border-box;
+}
+
+.song {
+    width: 100%;
+    will-change: transform;
+    contain: content;
+    transition: transform 0.2s ease;
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 1rem;
+    min-width: 0;
+}
+
+.song > div {
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+.covers {
+    height: auto;
+    max-width: 150px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+h3 {
+    font-size: clamp(var(--min-font-size), 5vw, var(--max-font-size));
+    margin-bottom: 0.5rem;
+}
