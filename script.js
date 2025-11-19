@@ -64,6 +64,22 @@ burger.addEventListener('click', () => {
     navLinks.classList.toggle('open');
 })
 
+const scrollBtn = document.getElementById('scrollBtn');
+scrollBtn.addEventListener("click", topFunction);
+scrollBtn.classList.add('btn', 'btn-dark');
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        scrollBtn.style.display = "block";
+    } else {
+        scrollBtn.style.display = "none";
+    }
+}
+
+function topFunction() {
+
+}
+
 fetch('data/playlist.json')
     .then((res) => res.json())
     .then((data) => {
