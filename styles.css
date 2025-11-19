@@ -85,3 +85,15 @@ nav {
   text-decoration: none;
   padding: 0.5rem 0;
 }
+
+@media (max-width:  576px) {
+    .covers {
+        max-width: 100px;
+    }
+    nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+    }
+}
