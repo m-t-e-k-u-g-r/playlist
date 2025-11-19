@@ -22,11 +22,39 @@ function createSection(name) {
     return container;
 }
 
+function renderPlaylist(songs, container) {
+    songs.forEach(song => {
+        const box = document.createElement('div');
+
+        const img = document.createElement('img');
+        img.src = '.assets/images/' + song.image;
+
+        const textBox = document.createElement('div');
+
+        const title = document.createElement('h3');
+        title.innerText = song.title;
+
+        const artist = document.createElement('p');
+        artist.innerText = song.artist;
+
+        textBox.appendChild(title);
+        textBox.appendChild(artist);
+        box.appendChild(img);
+        box.appendChild(textBox);
+        container.appendChild(box);
+    })
+}
+
 fetch('data/playlist.json')
     .then((res) => res.json())
     .then((data) => {
         Object.entries(data).forEach(([playlistName, songs]) => {
+            const valid = Array.isArray(songs)
+                ? songs.filter(s => s && s.title)
+                : [];
 
             const container = createSection(playlistName)
+
+            renderPlaylist(valid, container);
         })
     });
