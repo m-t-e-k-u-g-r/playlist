@@ -97,3 +97,23 @@ nav {
         z-index: 100;
     }
 }
+
+@media (min-width: 768px) {
+    .playlist {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    nav {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    #menuToggle {
+        display: none;
+    }
+    #nav-links {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: auto;
+    }
+}
