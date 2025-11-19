@@ -85,6 +85,20 @@ function topFunction() {
     document.documentElement.scrollTop = 0;
 }
 
+function filterSongs(event) {
+    document.querySelectorAll('.song').forEach(s => s.classList.remove('d-none'));
+    const searchTerm = event.target.value.toLowerCase();
+    const containers = Array.from(document.querySelectorAll('.song')).filter(container => {
+        const h3 = container.querySelector('h3');
+        const p = container.querySelector('p');
+        return !(
+            (h3 && h3.textContent.toLowerCase().includes(searchTerm)) ||
+            (p && p.textContent.toLowerCase().includes(searchTerm))
+        );
+    });
+    containers.forEach(c => c.classList.add('d-none'));
+}
+
 fetch('data/playlist.json')
     .then((res) => res.json())
     .then((data) => {
