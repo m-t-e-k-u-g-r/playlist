@@ -20,6 +20,10 @@ function createSection(name) {
     document.body.appendChild(title);
     document.body.appendChild(container);
 
+    title.addEventListener('click', () => {
+        container.classList.toggle('d-none');
+    });
+
     return container;
 }
 
