@@ -49,6 +49,21 @@ function renderPlaylist(songs, container) {
     })
 }
 
+function createNav(name) {
+    const id = (slugify(name)) + '-h2';
+    const nav = document.getElementById('nav-links');
+    const link = document.createElement('a');
+    link.href = "#" + id;
+    link.textContent = name;
+    nav.appendChild(link);
+}
+
+const navLinks = document.getElementById('nav-links');
+const burger = document.getElementById('menuToggle');
+burger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+})
+
 fetch('data/playlist.json')
     .then((res) => res.json())
     .then((data) => {
@@ -58,6 +73,8 @@ fetch('data/playlist.json')
                 : [];
 
             const container = createSection(playlistName)
+
+            createNav(playlistName);
 
             renderPlaylist(valid, container);
         })

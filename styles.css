@@ -49,3 +49,39 @@ h3 {
     font-size: clamp(var(--min-font-size), 5vw, var(--max-font-size));
     margin-bottom: 0.5rem;
 }
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: #222;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#menuToggle {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#nav-links {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+#nav-links.open {
+  display: flex;
+}
+
+#nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 0;
+}
