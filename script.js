@@ -34,7 +34,7 @@ function renderPlaylist(songs, container) {
 
         const img = document.createElement('img');
         img.classList.add('covers', 'border', 'p-1');
-        img.src = '.assets/images/' + song.image;
+        getSpotifyImage(song.link).then((link) => img.src = link.replaceAll("\"", ""));
 
         const textBox = document.createElement('div');
         textBox.classList.add('flex-grow-1');
@@ -51,6 +51,16 @@ function renderPlaylist(songs, container) {
         box.appendChild(textBox);
         container.appendChild(box);
     })
+}
+
+const serverURL = "http://127.0.0.1:3003/api/track/"
+async function getSpotifyImage(link) {
+    const res = await fetch(serverURL + link, {
+        method: 'GET'
+    })
+    
+    const url = await res.text();
+    return url;
 }
 
 function createNav(name) {
