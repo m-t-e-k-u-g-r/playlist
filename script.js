@@ -45,12 +45,34 @@ function renderPlaylist(songs, container) {
         const artist = document.createElement('p');
         artist.innerText = song.artist;
 
+        const spotifyBtn = createSpotifyLink(song)
+
         textBox.appendChild(title);
         textBox.appendChild(artist);
+        textBox.appendChild(spotifyBtn);
         box.appendChild(img);
         box.appendChild(textBox);
         container.appendChild(box);
     })
+}
+
+const spotifyBaseURL = 'https://open.spotify.com/track/';
+function createSpotifyLink(song) {
+  const a = document.createElement('a');
+  if (song.link.length > 22) {
+    a.href = song.link;
+  } else {
+    a.href = spotifyBaseURL + song.link;
+  }
+  a.target = '_blank';
+
+  const img = document.createElement('img');
+  img.src = './images/spotify.svg';
+  img.classList.add('img-thumbnail', 'ms-3');
+  img.alt = 'Open Spotify-Link'
+
+  a.appendChild(img);
+  return a;
 }
 
 const serverURL = "http://127.0.0.1:3003/api/track/"
