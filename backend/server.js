@@ -1,8 +1,10 @@
 const express = require('express');
+const NodeCache = require('node-cache');
 const app = express();
 const cors = require('cors')
 const tokenURL = "https://accounts.spotify.com/api/token";
 const songURL = "https://api.spotify.com/v1/tracks/";
+const tokenCache = new NodeCache( { stdTTL: 3599} );
 
 app.use(cors({
     origins: [
@@ -12,16 +14,22 @@ app.use(cors({
     methods: 'GET'
 }))
 app.get('/api/track/:id', async (req, res) => {
-    const id = req.params.id;
-    const token = await getSpotifyToken();
-    const spotifyResponse = await fetch(songURL + id, {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + token
+    try {
+        const id = req.params.id;
+        if (!id) return res.status(400).json({ error: 'Missing Track id' });
+        const token = tokenCache.get("token");
+        if (!token) {
+            let token = await getSpotifyToken();
         }
-    });
-    const data = await spotifyResponse.json();
-    res.json(data.album.images[0].url);
+        const spotifyResponse = await fetch(songURL + id, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const data = await spotifyResponse.json();
+        res.json(data.album.images[0].url);
+    } catch (error) {
+
+    }
 });
 
 async function getSpotifyToken() {
@@ -39,8 +47,8 @@ async function getSpotifyToken() {
     });
 
     const data = await res.json();
-    const token = data.access_token;
-    return token;
+    tokenCache.set("token", data.access_token);
+    return;
 }
 
-app.listen(process.env.PORT)
+app.listen(process.env.PORT || 3003)
