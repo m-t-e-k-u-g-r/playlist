@@ -1,7 +1,8 @@
 const express = require('express');
 const NodeCache = require('node-cache');
 const app = express();
-const cors = require('cors')
+const cors = require('cors');
+require('dotenv').config();
 const tokenURL = "https://accounts.spotify.com/api/token";
 const songURL = "https://api.spotify.com/v1/tracks/";
 const tokenCache = new NodeCache( { stdTTL: 3599} );
